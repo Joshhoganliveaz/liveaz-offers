@@ -302,6 +302,67 @@
   .diff-neg { color: var(--red); }
   .diff-pos { color: var(--green); }
 
+  /* Expandable Card Details */
+  .net-card { cursor: pointer; transition: border-color 0.2s; }
+  .net-card:hover { border-color: var(--gold); }
+  .net-card .tap-hint {
+    font-size: 0.58rem;
+    color: var(--sand);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+  }
+  .net-card .tap-hint::before { content: "▼ "; font-size: 0.5rem; }
+  .net-card.expanded .tap-hint::before { content: "▲ "; }
+  .card-details {
+    display: none;
+    text-align: left;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(165,154,127,0.25);
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+  .net-card.expanded .card-details { display: block; }
+  .card-details .detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+  }
+  .card-details .detail-row:not(:last-child) {
+    border-bottom: 1px solid rgba(165,154,127,0.1);
+  }
+  .card-details .detail-label {
+    color: var(--sand);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .card-details .detail-value {
+    font-weight: 600;
+    color: var(--charcoal);
+    text-align: right;
+  }
+  .card-details .detail-value .sub {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: var(--sand);
+  }
+
+  /* Swipe hint for mobile table */
+  .swipe-hint {
+    display: none;
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--sand);
+    padding: 6px 0;
+    letter-spacing: 0.03em;
+  }
+  .swipe-hint::before { content: "← "; }
+  .swipe-hint::after { content: " →"; }
+
   /* Payoff Input */
   .payoff-bar {
     display: flex;
@@ -427,6 +488,7 @@
     .payoff-bar { flex-wrap: wrap; }
 
     .comp-grid { min-width: 700px; }
+    .swipe-hint { display: block; }
 
     .analysis-box li { font-size: 0.72rem; }
 
@@ -482,7 +544,7 @@
 
   <div class="net-cards">
     <!-- Rank 1: Asad -->
-    <div class="net-card rank-1">
+    <div class="net-card rank-1" onclick="toggleCard(this)">
       <div class="rank">Highest Net</div>
       <div class="buyer-name">Asad</div>
       <div class="agent-name">Said Asad, HomeSmart</div>
@@ -491,9 +553,22 @@
       <div class="proceeds" data-net="816170">$476,170</div>
       <div class="proceeds-label">Est. Proceeds After Payoff</div>
       <div class="diff diff-pos">Baseline</div>
+      <div class="tap-hint">Tap for details</div>
+      <div class="card-details">
+        <div class="detail-row"><span class="detail-label">Purchase Price</span><span class="detail-value">$850,000</span></div>
+        <div class="detail-row"><span class="detail-label">Down Payment</span><span class="detail-value">$135,000<span class="sub">15.9%</span></span></div>
+        <div class="detail-row"><span class="detail-label">Loan Type</span><span class="detail-value">Conventional</span></div>
+        <div class="detail-row"><span class="detail-label">Close of Escrow</span><span class="detail-value">April 30, 2026<span class="sub">32 days</span></span></div>
+        <div class="detail-row"><span class="detail-label">Concessions</span><span class="detail-value">$0</span></div>
+        <div class="detail-row"><span class="detail-label">Buyer Agent Comp</span><span class="detail-value">$0<span class="sub">No addendum</span></span></div>
+        <div class="detail-row"><span class="detail-label">Earnest Money</span><span class="detail-value">$10,000</span></div>
+        <div class="detail-row"><span class="detail-label">Pre-Qual</span><span class="detail-value">$1,350,000<span class="sub">59% headroom</span></span></div>
+        <div class="detail-row"><span class="detail-label">Financing</span><span class="detail-value" style="color:var(--green)">Strong</span></div>
+        <div class="detail-row"><span class="detail-label">Offer Expires</span><span class="detail-value">3/29 at 6:00 PM</span></div>
+      </div>
     </div>
     <!-- Rank 2: Gittings/Jabjiniak -->
-    <div class="net-card">
+    <div class="net-card" onclick="toggleCard(this)">
       <div class="rank">#2</div>
       <div class="buyer-name">Gittings / Jabjiniak</div>
       <div class="agent-name">Cassandra Marrujo, Realty ONE</div>
@@ -502,9 +577,22 @@
       <div class="proceeds" data-net="804695">$464,695</div>
       <div class="proceeds-label">Est. Proceeds After Payoff</div>
       <div class="diff diff-neg">-$11,475 vs. highest</div>
+      <div class="tap-hint">Tap for details</div>
+      <div class="card-details">
+        <div class="detail-row"><span class="detail-label">Purchase Price</span><span class="detail-value">$865,000</span></div>
+        <div class="detail-row"><span class="detail-label">Down Payment</span><span class="detail-value">$215,000<span class="sub">24.9%</span></span></div>
+        <div class="detail-row"><span class="detail-label">Loan Type</span><span class="detail-value">Conventional</span></div>
+        <div class="detail-row"><span class="detail-label">Close of Escrow</span><span class="detail-value">April 29, 2026<span class="sub">31 days</span></span></div>
+        <div class="detail-row"><span class="detail-label">Concessions</span><span class="detail-value">$0</span></div>
+        <div class="detail-row"><span class="detail-label">Buyer Agent Comp</span><span class="detail-value">$25,950<span class="sub">3.0%</span></span></div>
+        <div class="detail-row"><span class="detail-label">Earnest Money</span><span class="detail-value">$8,650</span></div>
+        <div class="detail-row"><span class="detail-label">Pre-Qual</span><span class="detail-value">$650,000<span class="sub">Guild Mortgage</span></span></div>
+        <div class="detail-row"><span class="detail-label">Financing</span><span class="detail-value" style="color:var(--green)">Strong</span></div>
+        <div class="detail-row"><span class="detail-label">Offer Expires</span><span class="detail-value">3/29 at 8:00 PM</span></div>
+      </div>
     </div>
     <!-- Rank 3: Cazier -->
-    <div class="net-card">
+    <div class="net-card" onclick="toggleCard(this)">
       <div class="rank">#3</div>
       <div class="buyer-name">Cazier</div>
       <div class="agent-name">Unrepresented Buyer</div>
@@ -513,9 +601,22 @@
       <div class="proceeds" data-net="798220">$458,220</div>
       <div class="proceeds-label">Est. Proceeds After Payoff</div>
       <div class="diff diff-neg">-$17,950 vs. highest</div>
+      <div class="tap-hint">Tap for details</div>
+      <div class="card-details">
+        <div class="detail-row"><span class="detail-label">Purchase Price</span><span class="detail-value">$850,000</span></div>
+        <div class="detail-row"><span class="detail-label">Down Payment</span><span class="detail-value">$42,500<span class="sub">5.0%</span></span></div>
+        <div class="detail-row"><span class="detail-label">Loan Type</span><span class="detail-value">Conventional</span></div>
+        <div class="detail-row"><span class="detail-label">Close of Escrow</span><span class="detail-value">April 30, 2026<span class="sub">32 days</span></span></div>
+        <div class="detail-row"><span class="detail-label">Concessions</span><span class="detail-value">$8,500</span></div>
+        <div class="detail-row"><span class="detail-label">Buyer Agent Comp</span><span class="detail-value">$0<span class="sub">Unrepresented</span></span></div>
+        <div class="detail-row"><span class="detail-label">Earnest Money</span><span class="detail-value">$8,000</span></div>
+        <div class="detail-row"><span class="detail-label">Pre-Qual</span><span class="detail-value">$800,000<span class="sub">Mission Loans</span></span></div>
+        <div class="detail-row"><span class="detail-label">Financing</span><span class="detail-value" style="color:var(--gold)">Moderate</span></div>
+        <div class="detail-row"><span class="detail-label">Offer Expires</span><span class="detail-value">3/29 at 8:00 AM</span></div>
+      </div>
     </div>
     <!-- Rank 4: Ayoub -->
-    <div class="net-card">
+    <div class="net-card" onclick="toggleCard(this)">
       <div class="rank">#4</div>
       <div class="buyer-name">Ayoub</div>
       <div class="agent-name">Anthony Kadi, American Realty Brokers</div>
@@ -524,9 +625,22 @@
       <div class="proceeds" data-net="785060">$445,060</div>
       <div class="proceeds-label">Est. Proceeds After Payoff</div>
       <div class="diff diff-neg">-$31,110 vs. highest</div>
+      <div class="tap-hint">Tap for details</div>
+      <div class="card-details">
+        <div class="detail-row"><span class="detail-label">Purchase Price</span><span class="detail-value">$844,000</span></div>
+        <div class="detail-row"><span class="detail-label">Down Payment</span><span class="detail-value">$168,800<span class="sub">20.0%</span></span></div>
+        <div class="detail-row"><span class="detail-label">Loan Type</span><span class="detail-value">Conventional</span></div>
+        <div class="detail-row"><span class="detail-label">Close of Escrow</span><span class="detail-value">April 30, 2026<span class="sub">32 days</span></span></div>
+        <div class="detail-row"><span class="detail-label">Concessions</span><span class="detail-value">$0</span></div>
+        <div class="detail-row"><span class="detail-label">Buyer Agent Comp</span><span class="detail-value">$25,320<span class="sub">3.0%</span></span></div>
+        <div class="detail-row"><span class="detail-label">Earnest Money</span><span class="detail-value">$10,000</span></div>
+        <div class="detail-row"><span class="detail-label">Pre-Qual</span><span class="detail-value">$675,200<span class="sub">Not specified</span></span></div>
+        <div class="detail-row"><span class="detail-label">Financing</span><span class="detail-value" style="color:var(--green)">Solid</span></div>
+        <div class="detail-row"><span class="detail-label">Offer Expires</span><span class="detail-value">3/30 at 11:00 AM</span></div>
+      </div>
     </div>
     <!-- Rank 5: Lu/Nguyen -->
-    <div class="net-card">
+    <div class="net-card" onclick="toggleCard(this)">
       <div class="rank">#5</div>
       <div class="buyer-name">Lu / Nguyen</div>
       <div class="agent-name">Jamison Briley, RE Brokers of AZ</div>
@@ -535,6 +649,19 @@
       <div class="proceeds" data-net="780670">$440,670</div>
       <div class="proceeds-label">Est. Proceeds After Payoff</div>
       <div class="diff diff-neg">-$35,500 vs. highest</div>
+      <div class="tap-hint">Tap for details</div>
+      <div class="card-details">
+        <div class="detail-row"><span class="detail-label">Purchase Price</span><span class="detail-value">$850,000</span></div>
+        <div class="detail-row"><span class="detail-label">Down Payment</span><span class="detail-value">$75,000<span class="sub">8.8%</span></span></div>
+        <div class="detail-row"><span class="detail-label">Loan Type</span><span class="detail-value">Conventional</span></div>
+        <div class="detail-row"><span class="detail-label">Close of Escrow</span><span class="detail-value">May 5, 2026<span class="sub">37 days</span></span></div>
+        <div class="detail-row"><span class="detail-label">Concessions</span><span class="detail-value">$10,000</span></div>
+        <div class="detail-row"><span class="detail-label">Buyer Agent Comp</span><span class="detail-value">$25,500<span class="sub">3.0%</span></span></div>
+        <div class="detail-row"><span class="detail-label">Earnest Money</span><span class="detail-value">$10,000</span></div>
+        <div class="detail-row"><span class="detail-label">Pre-Qual</span><span class="detail-value">$765,000<span class="sub">Rocket Mortgage</span></span></div>
+        <div class="detail-row"><span class="detail-label">Financing</span><span class="detail-value" style="color:var(--red)">Tight</span></div>
+        <div class="detail-row"><span class="detail-label">Offer Expires</span><span class="detail-value">3/29 at 5:00 PM</span></div>
+      </div>
     </div>
   </div>
 
@@ -542,6 +669,7 @@
   <h3 class="section-title">Offer Terms Comparison</h3>
   <hr class="gold-rule">
 
+  <div class="swipe-hint">Swipe to compare all offers</div>
   <div class="table-scroll">
   <table class="comp-grid">
     <thead>
@@ -803,6 +931,14 @@
 </div>
 
 <script>
+function toggleCard(card) {
+  card.classList.toggle('expanded');
+  var hint = card.querySelector('.tap-hint');
+  if (hint) {
+    hint.textContent = card.classList.contains('expanded') ? 'Tap to close' : 'Tap for details';
+  }
+}
+
 function recalcProceeds() {
   var raw = document.getElementById('payoffInput').value.replace(/[^0-9.]/g, '');
   var payoff = parseFloat(raw) || 0;
