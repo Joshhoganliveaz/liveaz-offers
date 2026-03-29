@@ -223,7 +223,7 @@
   /* Net Summary Cards */
   .net-cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 12px;
     margin-bottom: 20px;
   }
@@ -514,9 +514,20 @@
       <div class="proceeds-label">Est. Proceeds After Payoff</div>
       <div class="diff diff-neg">-$17,950 vs. highest</div>
     </div>
-    <!-- Rank 4: Lu/Nguyen -->
+    <!-- Rank 4: Ayoub -->
     <div class="net-card">
       <div class="rank">#4</div>
+      <div class="buyer-name">Ayoub</div>
+      <div class="agent-name">Anthony Kadi, American Realty Brokers</div>
+      <div class="net-amount">$785,060</div>
+      <div class="net-label">Est. Net to Seller</div>
+      <div class="proceeds" data-net="785060">$445,060</div>
+      <div class="proceeds-label">Est. Proceeds After Payoff</div>
+      <div class="diff diff-neg">-$31,110 vs. highest</div>
+    </div>
+    <!-- Rank 5: Lu/Nguyen -->
+    <div class="net-card">
+      <div class="rank">#5</div>
       <div class="buyer-name">Lu / Nguyen</div>
       <div class="agent-name">Jamison Briley, RE Brokers of AZ</div>
       <div class="net-amount">$780,670</div>
@@ -539,17 +550,19 @@
         <th class="best">Offer 1: Asad</th>
         <th>Offer 2: Gittings / Jabjiniak</th>
         <th>Offer 3: Cazier</th>
-        <th>Offer 4: Lu / Nguyen</th>
+        <th>Offer 4: Ayoub</th>
+        <th>Offer 5: Lu / Nguyen</th>
       </tr>
     </thead>
     <tbody>
       <!-- Buyer Info Section -->
-      <tr class="section-row"><td colspan="5">Buyer Information</td></tr>
+      <tr class="section-row"><td colspan="6">Buyer Information</td></tr>
       <tr>
         <td>Buyer(s)</td>
         <td>Omar Asad &amp;<br>Fitri Cortes-Asad</td>
         <td>Lauren Gittings &amp;<br>Nathaniel Jabjiniak</td>
         <td>Joseph Cazier &amp;<br>Alicia Cazier</td>
+        <td>George R. Ayoub</td>
         <td>Quang Lu &amp;<br>Jennifer Nguyen</td>
       </tr>
       <tr>
@@ -557,6 +570,7 @@
         <td>Said Asad<br><span style="color:#A59A7F">HomeSmart</span></td>
         <td>Cassandra Marrujo<br><span style="color:#A59A7F">Realty ONE Group</span></td>
         <td><span class="tag tag-gold">Unrepresented</span></td>
+        <td>Anthony Kadi<br><span style="color:#A59A7F">American Realty Brokers</span></td>
         <td>Jamison Briley<br><span style="color:#A59A7F">RE Brokers of AZ</span></td>
       </tr>
       <tr>
@@ -565,19 +579,22 @@
         <td><span class="tag tag-green">Represented</span></td>
         <td><span class="tag tag-gold">Unrepresented</span></td>
         <td><span class="tag tag-green">Represented</span></td>
+        <td><span class="tag tag-green">Represented</span></td>
       </tr>
 
       <!-- Price & Financing Section -->
-      <tr class="section-row"><td colspan="5">Price &amp; Financing</td></tr>
+      <tr class="section-row"><td colspan="6">Price &amp; Financing</td></tr>
       <tr>
         <td>Purchase Price</td>
         <td class="money">$850,000</td>
         <td class="money best-val">$865,000</td>
         <td class="money">$850,000</td>
+        <td class="money">$844,000</td>
         <td class="money">$850,000</td>
       </tr>
       <tr>
         <td>Loan Type</td>
+        <td><span class="tag tag-green">Conventional</span></td>
         <td><span class="tag tag-green">Conventional</span></td>
         <td><span class="tag tag-green">Conventional</span></td>
         <td><span class="tag tag-green">Conventional</span></td>
@@ -588,6 +605,7 @@
         <td class="money">$135,000 <span style="color:#A59A7F">(15.9%)</span></td>
         <td class="money best-val">$215,000 <span style="color:#A59A7F">(24.9%)</span></td>
         <td class="money worst-val">$42,500 <span style="color:#A59A7F">(5.0%)</span></td>
+        <td class="money">$168,800 <span style="color:#A59A7F">(20.0%)</span></td>
         <td class="money">$75,000 <span style="color:#A59A7F">(8.8%)</span></td>
       </tr>
       <tr>
@@ -595,6 +613,7 @@
         <td class="money">$705,000</td>
         <td class="money best-val">$650,000</td>
         <td class="money worst-val">$807,500</td>
+        <td class="money">$675,200</td>
         <td class="money">$765,000</td>
       </tr>
       <tr>
@@ -603,21 +622,24 @@
         <td class="money">$8,650</td>
         <td class="money worst-val">$8,000</td>
         <td class="money best-val">$10,000</td>
+        <td class="money best-val">$10,000</td>
       </tr>
       <tr>
         <td>Pre-Qual Amount</td>
         <td class="money best-val">$1,350,000<br><span style="color:#A59A7F;font-size:0.68rem">Alerus Mortgage</span></td>
         <td class="money">$650,000<br><span style="color:#A59A7F;font-size:0.68rem">Guild Mortgage</span></td>
         <td class="money">$800,000<br><span style="color:#A59A7F;font-size:0.68rem">Mission Loans</span></td>
+        <td class="money">$675,200<br><span style="color:#A59A7F;font-size:0.68rem">Not specified</span></td>
         <td class="money">$765,000<br><span style="color:#A59A7F;font-size:0.68rem">Rocket Mortgage</span></td>
       </tr>
 
       <!-- Timeline Section -->
-      <tr class="section-row"><td colspan="5">Timeline</td></tr>
+      <tr class="section-row"><td colspan="6">Timeline</td></tr>
       <tr>
         <td>Close of Escrow</td>
         <td>April 30, 2026<br><span style="color:#A59A7F;font-size:0.68rem">32 days</span></td>
         <td class="best-val">April 29, 2026<br><span style="font-size:0.68rem">31 days</span></td>
+        <td>April 30, 2026<br><span style="color:#A59A7F;font-size:0.68rem">32 days</span></td>
         <td>April 30, 2026<br><span style="color:#A59A7F;font-size:0.68rem">32 days</span></td>
         <td>May 5, 2026<br><span style="color:#A59A7F;font-size:0.68rem">37 days</span></td>
       </tr>
@@ -627,22 +649,25 @@
         <td>At COE</td>
         <td>At COE</td>
         <td>At COE</td>
+        <td>At COE</td>
       </tr>
       <tr>
         <td>Offer Expires</td>
         <td>3/29 at 6:00 PM</td>
         <td>3/29 at 8:00 PM</td>
         <td>3/29 at 8:00 AM</td>
+        <td>3/30 at 11:00 AM</td>
         <td>3/29 at 5:00 PM</td>
       </tr>
 
       <!-- Costs to Seller Section -->
-      <tr class="section-row"><td colspan="5">Costs to Seller</td></tr>
+      <tr class="section-row"><td colspan="6">Costs to Seller</td></tr>
       <tr>
         <td>Seller Concessions</td>
         <td class="money best-val">$0</td>
         <td class="money best-val">$0</td>
         <td class="money">$8,500</td>
+        <td class="money best-val">$0</td>
         <td class="money worst-val">$10,000</td>
       </tr>
       <tr>
@@ -650,6 +675,7 @@
         <td class="money best-val">$0<br><span style="font-size:0.68rem">No addendum</span></td>
         <td class="money worst-val">$25,950<br><span style="color:#A59A7F;font-size:0.68rem">3.0% of price</span></td>
         <td class="money best-val">$0<br><span style="color:#A59A7F;font-size:0.68rem">Unrepresented</span></td>
+        <td class="money worst-val">$25,320<br><span style="color:#A59A7F;font-size:0.68rem">3.0% of price</span></td>
         <td class="money worst-val">$25,500<br><span style="color:#A59A7F;font-size:0.68rem">3.0% of price</span></td>
       </tr>
       <tr>
@@ -657,6 +683,7 @@
         <td class="money">$29,750<br><span style="color:#A59A7F;font-size:0.68rem">3.5%</span></td>
         <td class="money">$30,275<br><span style="color:#A59A7F;font-size:0.68rem">3.5%</span></td>
         <td class="money worst-val">$38,250<br><span style="font-size:0.68rem">4.5% (unrep +1%)</span></td>
+        <td class="money">$29,540<br><span style="color:#A59A7F;font-size:0.68rem">3.5%</span></td>
         <td class="money">$29,750<br><span style="color:#A59A7F;font-size:0.68rem">3.5%</span></td>
       </tr>
       <tr>
@@ -664,6 +691,7 @@
         <td class="money best-val">$0<br><span style="color:#A59A7F;font-size:0.68rem">Buyer declines</span></td>
         <td class="money best-val">$0<br><span style="color:#A59A7F;font-size:0.68rem">Buyer pays</span></td>
         <td class="money">$950<br><span style="color:#A59A7F;font-size:0.68rem">Old Republic, Seller pays</span></td>
+        <td class="money best-val">$0<br><span style="color:#A59A7F;font-size:0.68rem">Buyer pays</span></td>
         <td class="money best-val">$0<br><span style="color:#A59A7F;font-size:0.68rem">Buyer declines</span></td>
       </tr>
       <tr>
@@ -671,10 +699,12 @@
         <td class="money" style="font-weight:700">$29,750</td>
         <td class="money" style="font-weight:700">$56,225</td>
         <td class="money" style="font-weight:700">$47,700</td>
+        <td class="money" style="font-weight:700">$54,860</td>
         <td class="money worst-val" style="font-weight:700">$65,250</td>
       </tr>
       <tr>
         <td>Est. Common Costs<br><span style="font-size:0.62rem;text-transform:none;letter-spacing:0">(Title, escrow, HOA fees)</span></td>
+        <td class="money">$4,080</td>
         <td class="money">$4,080</td>
         <td class="money">$4,080</td>
         <td class="money">$4,080</td>
@@ -687,16 +717,18 @@
         <td class="table-proceeds" data-net="816170" style="color:var(--gold);font-size:1rem">$476,170</td>
         <td class="table-proceeds" data-net="804695">$464,695</td>
         <td class="table-proceeds" data-net="798220">$458,220</td>
+        <td class="table-proceeds" data-net="785060">$445,060</td>
         <td class="table-proceeds" data-net="780670">$440,670</td>
       </tr>
 
       <!-- Additional Terms -->
-      <tr class="section-row"><td colspan="5">Additional Terms &amp; Strength Indicators</td></tr>
+      <tr class="section-row"><td colspan="6">Additional Terms &amp; Strength Indicators</td></tr>
       <tr>
         <td>Escrow Company</td>
         <td>Magnus Capital Title<br><span style="color:#A59A7F;font-size:0.68rem">Krista Diaz</span></td>
         <td>ROC Title<br><span style="color:#A59A7F;font-size:0.68rem">Jaclyn Baker</span></td>
         <td>Magnus Capital Title<br><span style="color:#A59A7F;font-size:0.68rem">Krista Diaz</span></td>
+        <td>Pioneer Title<br><span style="color:#A59A7F;font-size:0.68rem">Ann Myers</span></td>
         <td>Magnus Title AZ<br><span style="color:#A59A7F;font-size:0.68rem">Krista Diaz</span></td>
       </tr>
       <tr>
@@ -705,12 +737,14 @@
         <td><span class="tag tag-gray">Not specified</span></td>
         <td><span class="tag tag-green">Buyer pays</span></td>
         <td><span class="tag tag-green">Buyer pays</span></td>
+        <td><span class="tag tag-green">Buyer pays</span></td>
       </tr>
       <tr>
         <td>HOA Transfer Fee</td>
         <td><span style="color:#A59A7F;font-size:0.72rem">Standard</span></td>
         <td><span style="color:#A59A7F;font-size:0.72rem">Standard</span></td>
         <td><span class="tag tag-green">Buyer pays</span></td>
+        <td><span style="color:#A59A7F;font-size:0.72rem">50/50 split</span></td>
         <td><span class="tag tag-green">Buyer pays</span></td>
       </tr>
       <tr>
@@ -728,6 +762,10 @@
           <span style="font-size:0.68rem;color:var(--sand)">Pre-qual $800K<br>Loan is $807.5K</span>
         </td>
         <td>
+          <span class="tag tag-green">Solid</span><br>
+          <span style="font-size:0.68rem;color:var(--sand)">20% down<br>Conventional</span>
+        </td>
+        <td>
           <span class="tag tag-red">Tight</span><br>
           <span style="font-size:0.68rem;color:var(--sand)">Pre-qual matches loan<br>No headroom</span>
         </td>
@@ -741,8 +779,9 @@
     <h4>Multi-Counter Strategy Considerations</h4>
     <ul>
       <li><strong>Asad</strong> delivers the highest net ($816,170) and carries the strongest pre-qualification ($1.35M, 59% above purchase price). No seller-paid buyer agent comp and no concessions make this the cleanest offer. However, no seller compensation addendum was included, so the buyer's agent arrangement should be confirmed.</li>
-      <li><strong>Gittings/Jabjiniak</strong> moved to second-highest net ($804,695) after raising their purchase price to $865,000. They have the earliest close date (April 29), the largest down payment (24.9%), and the lowest loan-to-value, signaling strong financial footing and lower appraisal risk. The 3% buyer agent comp remains their primary cost driver.</li>
+      <li><strong>Gittings/Jabjiniak</strong> nets second ($804,695) after raising their purchase price to $865,000. They have the earliest close date (April 29), the largest down payment (24.9%), and the lowest loan-to-value, signaling strong financial footing and lower appraisal risk. The 3% buyer agent comp remains their primary cost driver.</li>
       <li><strong>Cazier</strong> nets third ($798,220) despite the additional 1% listing commission for unrepresented buyers. The $8,500 in concessions and $950 home warranty reduce the gap. Pre-qualification at $800K is slightly below their $807.5K loan amount, which warrants attention.</li>
+      <li><strong>Ayoub</strong> nets fourth ($785,060) with a $844,000 purchase price. Solid 20% down payment and $10K earnest money signal commitment. The 3% buyer agent comp and lower price are the main factors keeping the net below Cazier. Offer expires 3/30, giving an extra day.</li>
       <li><strong>Lu/Nguyen</strong> has the lowest net to seller ($780,670). The combination of $10K concessions, 3% buyer agent comp, and the latest close date (May 5) makes this the most expensive and slowest offer. Their pre-qualification exactly matches their loan amount with no headroom.</li>
       <li><strong>The $35,500 net spread</strong> between the highest and lowest offers is significant. A multi-counter could ask all buyers to improve terms (reduce concessions, adjust buyer agent comp) to compete on net rather than sticker price.</li>
     </ul>
