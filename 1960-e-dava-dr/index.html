@@ -401,6 +401,42 @@
     line-height: 1.4;
     font-style: italic;
   }
+
+  /* Table scroll wrapper */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .header { flex-direction: column; gap: 10px; padding: 14px 16px; text-align: center; }
+    .header-left { justify-content: center; }
+    .header-right { text-align: center; }
+
+    .subject-banner { flex-direction: column; gap: 8px; padding: 12px 16px; text-align: center; }
+    .subject-price { text-align: center; }
+    .subject-info h1 { font-size: 1.1rem; }
+
+    .content { padding: 16px; }
+
+    .net-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .net-card { padding: 12px 8px; }
+    .net-card .net-amount { font-size: 1.1rem; }
+    .net-card .proceeds { font-size: 0.9rem; }
+    .net-card .buyer-name { font-size: 0.8rem; }
+    .net-card .agent-name { font-size: 0.6rem; }
+
+    .payoff-bar { flex-wrap: wrap; }
+
+    .comp-grid { min-width: 700px; }
+
+    .analysis-box li { font-size: 0.72rem; }
+
+    .footer { flex-direction: column; gap: 6px; padding: 12px 16px; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .net-cards { grid-template-columns: 1fr; }
+    .net-card.rank-1 { order: -1; }
+  }
 </style>
 </head>
 <body>
@@ -495,6 +531,7 @@
   <h3 class="section-title">Offer Terms Comparison</h3>
   <hr class="gold-rule">
 
+  <div class="table-scroll">
   <table class="comp-grid">
     <thead>
       <tr>
@@ -697,6 +734,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
   <!-- Analysis Box -->
   <div class="analysis-box">
