@@ -90,47 +90,47 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PROP-01 | — | Pending |
-| PROP-02 | — | Pending |
-| PROP-03 | — | Pending |
-| PROP-04 | — | Pending |
-| OFFR-01 | — | Pending |
-| OFFR-02 | — | Pending |
-| OFFR-03 | — | Pending |
-| OFFR-04 | — | Pending |
-| OFFR-05 | — | Pending |
-| OFFR-06 | — | Pending |
-| OFFR-07 | — | Pending |
-| OFFR-08 | — | Pending |
-| OFFR-09 | — | Pending |
-| COST-01 | — | Pending |
-| COST-02 | — | Pending |
-| COST-03 | — | Pending |
-| COST-04 | — | Pending |
-| COST-05 | — | Pending |
-| COST-06 | — | Pending |
-| CALC-01 | — | Pending |
-| CALC-02 | — | Pending |
-| CALC-03 | — | Pending |
-| CALC-04 | — | Pending |
-| ANLS-01 | — | Pending |
-| ANLS-02 | — | Pending |
-| PAGE-01 | — | Pending |
-| PAGE-02 | — | Pending |
-| PAGE-03 | — | Pending |
-| PAGE-04 | — | Pending |
-| PAGE-05 | — | Pending |
-| PAGE-06 | — | Pending |
-| PAGE-07 | — | Pending |
-| PAGE-08 | — | Pending |
-| PAGE-09 | — | Pending |
-| OPT-01 | — | Pending |
+| PROP-01 | Phase 1 | Pending |
+| PROP-02 | Phase 1 | Pending |
+| PROP-03 | Phase 1 | Pending |
+| PROP-04 | Phase 1 | Pending |
+| OFFR-01 | Phase 1 | Pending |
+| OFFR-02 | Phase 1 | Pending |
+| OFFR-03 | Phase 1 | Pending |
+| OFFR-04 | Phase 1 | Pending |
+| OFFR-05 | Phase 1 | Pending |
+| OFFR-06 | Phase 1 | Pending |
+| OFFR-07 | Phase 1 | Pending |
+| OFFR-08 | Phase 1 | Pending |
+| OFFR-09 | Phase 1 | Pending |
+| COST-01 | Phase 1 | Pending |
+| COST-02 | Phase 1 | Pending |
+| COST-03 | Phase 1 | Pending |
+| COST-04 | Phase 1 | Pending |
+| COST-05 | Phase 1 | Pending |
+| COST-06 | Phase 1 | Pending |
+| CALC-01 | Phase 2 | Pending |
+| CALC-02 | Phase 2 | Pending |
+| CALC-03 | Phase 2 | Pending |
+| CALC-04 | Phase 2 | Pending |
+| ANLS-01 | Phase 1 | Pending |
+| ANLS-02 | Phase 1 | Pending |
+| PAGE-01 | Phase 3 | Pending |
+| PAGE-02 | Phase 3 | Pending |
+| PAGE-03 | Phase 3 | Pending |
+| PAGE-04 | Phase 3 | Pending |
+| PAGE-05 | Phase 3 | Pending |
+| PAGE-06 | Phase 3 | Pending |
+| PAGE-07 | Phase 3 | Pending |
+| PAGE-08 | Phase 3 | Pending |
+| PAGE-09 | Phase 3 | Pending |
+| OPT-01 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 35 total
-- Mapped to phases: 0
-- Unmapped: 35 ⚠️
+- Mapped to phases: 35
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-30*
-*Last updated: 2026-03-30 after strategic pivot*
+*Last updated: 2026-03-30 — phase traceability added*
