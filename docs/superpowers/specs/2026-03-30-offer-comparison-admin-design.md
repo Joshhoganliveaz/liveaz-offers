@@ -21,7 +21,7 @@ A self-service admin tool at `offers.liveazco.com/_admin/` where the team upload
 4. Upload **purchase contract PDFs** (one or more). Each PDF creates an offer card with extracted fields. Additional addendums can be attached to an existing offer card via "Add Addendum" and Claude merges the terms (counter offer overrides original).
 5. **Review with checkboxes.** Each key field per offer (purchase price, down payment, concessions, buyer agent comp, earnest money, close date, pre-qual amount) has an editable input + a checkbox. All checkboxes must be checked before publish unlocks.
 6. **Net-to-seller calculations** auto-compute in real-time using the cost template + each offer's terms. Offers rank by net, highest first.
-7. **Strategic analysis** text area pre-filled by Claude's draft. Team edits before publishing.
+7. **Strategic analysis** text area pre-filled by Claude's draft (a separate `/api/analyze` call made after all offers are parsed and confirmed, sending the structured offer data for comparative analysis). Team edits before publishing.
 8. **Preview** opens the generated page in a new tab.
 9. **Publish** (button disabled until all checkboxes confirmed). Commits HTML to GitHub repo via Pages Function, Cloudflare auto-deploys. Shows the live URL on success.
 
@@ -68,6 +68,11 @@ Two endpoints, deployed automatically with the site. Secrets stored in Cloudflar
 - Returns: live URL on success
 - If slug already exists, overwrites (update flow)
 
+**`POST /api/analyze`**
+- Receives: structured offer data (all parsed offers + property details)
+- Sends to Claude with a prompt to draft a strategic analysis comparing the offers (strengths, weaknesses, net spread, financing risk, recommended negotiation strategy)
+- Returns: analysis text as a string
+
 **`GET /api/listings`**
 - Fetches directory listing from GitHub repo to populate "Load Existing" dropdown
 - Returns: array of existing slugs
@@ -76,6 +81,12 @@ Two endpoints, deployed automatically with the site. Secrets stored in Cloudflar
 
 - `ANTHROPIC_API_KEY` for Claude PDF parsing
 - `GITHUB_TOKEN` fine-grained PAT scoped to liveaz-offers repo with `contents:write`
+- `ADMIN_KEY` a shared secret the admin page sends as an `X-Admin-Key` header on all API requests. Pages Functions reject requests without a valid key. Prevents API cost abuse from anyone who discovers the endpoint URLs. The admin page stores this key in its source (acceptable since the admin page itself is the trust boundary).
+
+### Security
+
+- All Pages Function endpoints validate the `X-Admin-Key` header before processing.
+- CORS: `Access-Control-Allow-Origin` restricted to `https://offers.liveazco.com` on all endpoints. Requests from other origins are rejected.
 
 ## PDF Parsing
 
