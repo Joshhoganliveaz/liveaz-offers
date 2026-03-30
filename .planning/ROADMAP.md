@@ -26,10 +26,11 @@ Build a single-file HTML offer comparison tool in three phases: first the comple
   3. User can add and remove offers dynamically without losing data in other offers
   4. User can configure cost template line items (commission %, title/escrow, warranty, TC fee, custom items) and those defaults persist across browser sessions
   5. User can enter strategic analysis notes in a text area
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — HTML structure, CSS, property details, cost template with localStorage, analysis notes
+- [ ] 01-02-PLAN.md — Dynamic offer card system (add/remove/renumber) with all field groups
 
 ### Phase 2: Calculations & Ranking
 **Goal**: Net-to-seller calculates instantly as any field changes, and offers auto-sort by best net
@@ -63,6 +64,6 @@ Phases execute in numeric order: 1 -> 2 -> 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Form & Data Entry | 0/? | Not started | - |
+| 1. Form & Data Entry | 0/2 | Planning complete | - |
 | 2. Calculations & Ranking | 0/? | Not started | - |
 | 3. Branded Output | 0/? | Not started | - |
