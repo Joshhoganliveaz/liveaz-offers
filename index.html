@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer Comparison Tool</title>
+  <style>
+    /* === RESET & BASE === */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F9FAFB;
+      color: #111827;
+      line-height: 1.5;
+      padding: 24px 16px 80px;
+    }
+
+    /* === LAYOUT === */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* === HEADER === */
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    /* === CARDS === */
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .card h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #111827;
+    }
+
+    /* === FORM ELEMENTS === */
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #374151;
+      margin-bottom: 4px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #111827;
+      background: #FFFFFF;
+      transition: border-color 0.15s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #C9953E;
+      box-shadow: 0 0 0 2px rgba(201, 149, 62, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .field-row {
+      margin-bottom: 12px;
+    }
+
+    /* === INPUT PREFIX / SUFFIX === */
+    .input-prefix,
+    .input-suffix {
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix .prefix,
+    .input-suffix .suffix {
+      padding: 8px 8px;
+      background: #F3F4F6;
+      border: 1px solid #D1D5DB;
+      font-size: 0.9rem;
+      color: #6B7280;
+      white-space: nowrap;
+    }
+
+    .input-prefix .prefix {
+      border-radius: 6px 0 0 6px;
+      border-right: none;
+    }
+
+    .input-prefix input {
+      border-radius: 0 6px 6px 0;
+    }
+
+    .input-suffix .suffix {
+      border-radius: 0 6px 6px 0;
+      border-left: none;
+    }
+
+    .input-suffix input {
+      border-radius: 6px 0 0 6px;
+    }
+
+    /* === PROPERTY DETAILS === */
+    .address-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .address-row .city-field {
+      flex: 2;
+    }
+
+    .address-row .state-field {
+      flex: 0.7;
+    }
+
+    .address-row .zip-field {
+      flex: 1;
+    }
+
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px 16px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .property-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .address-row {
+        flex-wrap: wrap;
+      }
+
+      .address-row > div {
+        flex: 1 1 100%;
+      }
+    }
+
+    .property-grid .field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* === COLLAPSIBLE SECTION === */
+    .collapsible-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      padding: 0;
+    }
+
+    .collapsible-header h2 {
+      margin-bottom: 0;
+    }
+
+    .collapsible-header .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .collapsible-header .hint {
+      font-size: 0.8rem;
+      color: #9CA3AF;
+      font-weight: 400;
+    }
+
+    .chevron {
+      font-size: 0.85rem;
+      color: #9CA3AF;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .chevron.rotated {
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .collapsible-content.open {
+      max-height: 2000px;
+    }
+
+    .collapsible-inner {
+      padding-top: 16px;
+    }
+
+    /* === COST TEMPLATE === */
+    .cost-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 16px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .cost-fields {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .cost-divider {
+      border: none;
+      border-top: 1px solid #E5E7EB;
+      margin: 16px 0;
+    }
+
+    .cost-sub-heading {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .custom-item-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+      margin-bottom: 8px;
+    }
+
+    .custom-item-row .item-label {
+      flex: 2;
+    }
+
+    .custom-item-row .item-amount {
+      flex: 1;
+    }
+
+    .custom-item-row .btn-remove-item {
+      background: none;
+      border: none;
+      color: #EF4444;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 8px 4px;
+      line-height: 1;
+    }
+
+    .custom-item-row .btn-remove-item:hover {
+      color: #DC2626;
+    }
+
+    .btn-add-item {
+      background: none;
+      border: 1px dashed #D1D5DB;
+      border-radius: 6px;
+      padding: 6px 14px;
+      color: #6B7280;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+
+    .btn-add-item:hover {
+      border-color: #9CA3AF;
+      color: #374151;
+    }
+
+    .cost-summary {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 4px;
+    }
+
+    .commission-note {
+      font-size: 0.85rem;
+      color: #6B7280;
+      margin-bottom: 12px;
+    }
+
+    .reset-link {
+      background: none;
+      border: none;
+      color: #9CA3AF;
+      cursor: pointer;
+      font-size: 0.8rem;
+      text-decoration: underline;
+      padding: 0;
+    }
+
+    .reset-link:hover {
+      color: #6B7280;
+    }
+
+    /* === OFFER CARDS (pre-defined for Plan 02) === */
+    .offer-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-left: 3px solid #C9953E;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .offer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .offer-header h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .field-group {
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+
+    .field-group:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .field-group h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #6B7280;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+    }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #EF4444;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 4px 8px;
+    }
+
+    .btn-remove:hover {
+      color: #DC2626;
+    }
+
+    /* === OFFERS CONTAINER === */
+    .offers-placeholder {
+      text-align: center;
+      color: #9CA3AF;
+      padding: 32px 16px;
+      font-size: 0.95rem;
+    }
+
+    /* === BUTTONS === */
+    .action-bar {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .btn-add-offer {
+      background: #FFFFFF;
+      border: 1px solid #D1D5DB;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #374151;
+      cursor: pointer;
+    }
+
+    .btn-add-offer:hover {
+      background: #F9FAFB;
+      border-color: #9CA3AF;
+    }
+
+    .btn-generate {
+      background: #C9953E;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>Offer Comparison Tool</h1>
+    </div>
+
+    <!-- Cost Template (collapsible) -->
+    <div class="card">
+      <div class="collapsible-header" onclick="toggleSection(this)">
+        <h2>Cost Template</h2>
+        <div class="header-right">
+          <span class="hint">(click to configure)</span>
+          <span class="chevron">&#9662;</span>
+        </div>
+      </div>
+      <div class="collapsible-content">
+        <div class="collapsible-inner">
+          <div class="cost-fields">
+            <div class="field">
+              <label for="listing-commission">Listing Commission</label>
+              <div class="input-suffix">
+                <input type="number" id="listing-commission" step="0.01" min="0" max="100" placeholder="0">
+                <span class="suffix">%</span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="title-escrow">Title/Escrow Estimate</label>
+              <div class="input-prefix">
+                <span class="prefix">$</span>
+                <input type="number" id="title-escrow" step="1" min="0" placeholder="0">
+              </div>
+            </div>
+            <div class="field">
+              <label for="home-warranty">Home Warranty</label>
+              <div class="input-prefix">
+                <span class="prefix">$</span>
+                <input type="number" id="home-warranty" step="1" min="0" placeholder="0">
+              </div>
+            </div>
+            <div class="field">
+              <label for="tc-fee">TC Fee</label>
+              <div class="input-prefix">
+                <span class="prefix">$</span>
+                <input type="number" id="tc-fee" step="1" min="0" placeholder="0">
+              </div>
+            </div>
+          </div>
+
+          <hr class="cost-divider">
+
+          <div class="cost-sub-heading">Additional Items</div>
+          <div id="custom-items"></div>
+          <button type="button" class="btn-add-item" onclick="addCustomItem()">+ Add Item</button>
+
+          <div id="cost-total" class="cost-summary">Total Fixed Costs: $0.00</div>
+          <div id="commission-note" class="commission-note"></div>
+
+          <button type="button" class="reset-link" onclick="resetCostTemplate()">Reset Defaults</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Property Details -->
+    <div class="card">
+      <h2>Property Details</h2>
+
+      <div class="field-row">
+        <label for="street-address">Street Address</label>
+        <input type="text" id="street-address" placeholder="1960 E Dava Dr">
+      </div>
+
+      <div class="address-row">
+        <div class="city-field">
+          <label for="city">City</label>
+          <input type="text" id="city" placeholder="Tempe">
+        </div>
+        <div class="state-field">
+          <label for="state">State</label>
+          <input type="text" id="state" placeholder="AZ">
+        </div>
+        <div class="zip-field">
+          <label for="zip">Zip</label>
+          <input type="text" id="zip" placeholder="85283">
+        </div>
+      </div>
+
+      <div class="property-grid">
+        <div class="field">
+          <label for="beds">Beds</label>
+          <input type="number" id="beds" min="0" step="1" placeholder="0">
+        </div>
+        <div class="field">
+          <label for="baths">Baths</label>
+          <input type="number" id="baths" min="0" step="0.5" placeholder="0">
+        </div>
+        <div class="field">
+          <label for="sqft">Sq Ft</label>
+          <input type="number" id="sqft" min="0" step="1" placeholder="0">
+        </div>
+        <div class="field">
+          <label for="year-built">Year Built</label>
+          <input type="number" id="year-built" min="1800" max="2030" step="1" placeholder="2000">
+        </div>
+        <div class="field">
+          <label for="lot-size">Lot Size</label>
+          <input type="text" id="lot-size" placeholder="0.25 acres">
+        </div>
+        <div class="field">
+          <label for="pool">Pool</label>
+          <select id="pool">
+            <option value="">None</option>
+            <option value="private">Private</option>
+            <option value="community">Community</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="garage">Garage Spaces</label>
+          <input type="number" id="garage" min="0" step="1" placeholder="0">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label for="list-price">List Price</label>
+        <div class="input-prefix">
+          <span class="prefix">$</span>
+          <input type="number" id="list-price" min="0" step="1" placeholder="0">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label for="notable-features">Notable Features</label>
+        <textarea id="notable-features" rows="3" placeholder="Pool, updated kitchen, mountain views..."></textarea>
+      </div>
+    </div>
+
+    <!-- Offers Container -->
+    <div id="offers-container">
+      <div class="offers-placeholder">Click Add Offer below to start entering offers</div>
+    </div>
+
+    <!-- Strategic Analysis -->
+    <div class="card">
+      <h2>Strategic Analysis</h2>
+      <div class="field-row">
+        <label for="analysis-notes">Analysis &amp; Recommendations</label>
+        <textarea id="analysis-notes" rows="5" placeholder="Enter your strategic analysis and recommendations for the seller..."></textarea>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <button type="button" class="btn-add-offer" id="btn-add-offer">Add Offer</button>
+      <button type="button" class="btn-generate" id="btn-generate" disabled>Generate Page</button>
+    </div>
+
+  </div>
+
+  <script>
+    // === CONSTANTS ===
+    const STORAGE_KEY = 'liveaz-offer-costs';
+
+    // === COST TEMPLATE ===
+
+    function saveCostTemplate() {
+      try {
+        const data = {
+          listingCommission: document.getElementById('listing-commission').value,
+          titleEscrow: document.getElementById('title-escrow').value,
+          homeWarranty: document.getElementById('home-warranty').value,
+          tcFee: document.getElementById('tc-fee').value,
+          customItems: getCustomItems()
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch (e) {
+        // localStorage unavailable or quota exceeded — silently continue
+      }
+    }
+
+    function loadCostTemplate() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const data = JSON.parse(saved);
+
+        if (data.listingCommission) document.getElementById('listing-commission').value = data.listingCommission;
+        if (data.titleEscrow) document.getElementById('title-escrow').value = data.titleEscrow;
+        if (data.homeWarranty) document.getElementById('home-warranty').value = data.homeWarranty;
+        if (data.tcFee) document.getElementById('tc-fee').value = data.tcFee;
+
+        if (data.customItems && Array.isArray(data.customItems)) {
+          data.customItems.forEach(function(item) {
+            addCustomItem(item.label, item.amount);
+          });
+        }
+
+        updateCostTotal();
+      } catch (e) {
+        // localStorage unavailable or corrupted data — silently continue
+      }
+    }
+
+    function resetCostTemplate() {
+      if (!window.confirm('Reset all cost template values? This clears your saved defaults.')) return;
+
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {
+        // silently continue
+      }
+
+      document.getElementById('listing-commission').value = '';
+      document.getElementById('title-escrow').value = '';
+      document.getElementById('home-warranty').value = '';
+      document.getElementById('tc-fee').value = '';
+      document.getElementById('custom-items').innerHTML = '';
+
+      updateCostTotal();
+    }
+
+    function getCustomItems() {
+      var items = [];
+      document.querySelectorAll('.custom-item-row').forEach(function(row) {
+        var label = row.querySelector('.custom-item-label').value;
+        var amount = row.querySelector('.custom-item-amount').value;
+        items.push({ label: label, amount: amount });
+      });
+      return items;
+    }
+
+    function updateCostTotal() {
+      var titleEscrow = parseFloat(document.getElementById('title-escrow').value) || 0;
+      var warranty = parseFloat(document.getElementById('home-warranty').value) || 0;
+      var tcFee = parseFloat(document.getElementById('tc-fee').value) || 0;
+      var listingComm = parseFloat(document.getElementById('listing-commission').value) || 0;
+
+      var customTotal = 0;
+      document.querySelectorAll('.custom-item-amount').forEach(function(input) {
+        customTotal += parseFloat(input.value) || 0;
+      });
+
+      // Listing commission is a percentage, not a dollar amount.
+      // The dollar total here excludes commission (applied per-offer in Phase 2).
+      var total = titleEscrow + warranty + tcFee + customTotal;
+
+      document.getElementById('cost-total').textContent =
+        'Total Fixed Costs: $' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+      document.getElementById('commission-note').textContent =
+        listingComm ? '+ ' + listingComm + '% listing commission (calculated per offer)' : '';
+    }
+
+    function addCustomItem(label, amount) {
+      var container = document.getElementById('custom-items');
+      var row = document.createElement('div');
+      row.className = 'custom-item-row';
+      row.innerHTML =
+        '<div class="item-label">' +
+          '<input type="text" class="custom-item-label" placeholder="Item name" value="' + (label || '') + '">' +
+        '</div>' +
+        '<div class="item-amount">' +
+          '<div class="input-prefix">' +
+            '<span class="prefix">$</span>' +
+            '<input type="number" class="custom-item-amount" step="1" min="0" placeholder="0" value="' + (amount || '') + '">' +
+          '</div>' +
+        '</div>' +
+        '<button type="button" class="btn-remove-item" onclick="removeCustomItem(this)" title="Remove item">&times;</button>';
+
+      container.appendChild(row);
+
+      // Attach input listeners to new fields
+      row.querySelector('.custom-item-label').addEventListener('input', function() {
+        saveCostTemplate();
+      });
+      row.querySelector('.custom-item-amount').addEventListener('input', function() {
+        saveCostTemplate();
+        updateCostTotal();
+      });
+    }
+
+    function removeCustomItem(btn) {
+      btn.closest('.custom-item-row').remove();
+      saveCostTemplate();
+      updateCostTotal();
+    }
+
+    // === COLLAPSIBLE ===
+
+    function toggleSection(header) {
+      var content = header.nextElementSibling;
+      var chevron = header.querySelector('.chevron');
+      content.classList.toggle('open');
+      chevron.classList.toggle('rotated');
+    }
+
+    // === BEFOREUNLOAD GUARD ===
+
+    window.addEventListener('beforeunload', function(e) {
+      // Check property inputs
+      var propertyInputs = document.querySelectorAll('#street-address, #city, #state, #zip, #beds, #baths, #sqft, #year-built, #lot-size, #garage, #list-price');
+      var hasPropertyData = Array.from(propertyInputs).some(function(input) {
+        return input.value.trim() !== '';
+      });
+
+      // Check textareas
+      var notableFeatures = document.getElementById('notable-features').value.trim();
+      var analysisNotes = document.getElementById('analysis-notes').value.trim();
+
+      // Check offer cards
+      var offerInputs = document.querySelectorAll('.offer-card input, .offer-card textarea, .offer-card select');
+      var hasOfferData = Array.from(offerInputs).some(function(input) {
+        return input.value && input.value.trim() !== '';
+      });
+
+      if (hasPropertyData || notableFeatures || analysisNotes || hasOfferData) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    // === INIT ===
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load persisted cost template
+      loadCostTemplate();
+
+      // Attach input listeners to fixed cost fields
+      var costFieldIds = ['listing-commission', 'title-escrow', 'home-warranty', 'tc-fee'];
+      costFieldIds.forEach(function(id) {
+        document.getElementById(id).addEventListener('input', function() {
+          saveCostTemplate();
+          updateCostTotal();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
