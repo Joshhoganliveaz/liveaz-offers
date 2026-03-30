@@ -383,6 +383,48 @@
       color: #DC2626;
     }
 
+    /* === OFFER CARD FIELD LAYOUTS === */
+    .offer-fields-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 16px;
+      margin-bottom: 12px;
+    }
+
+    .offer-fields-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px 16px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .offer-fields-grid-2,
+      .offer-fields-grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .checkbox-row label {
+      display: inline;
+      margin-bottom: 0;
+      font-weight: 400;
+      cursor: pointer;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+      cursor: pointer;
+    }
+
     /* === OFFERS CONTAINER === */
     .offers-placeholder {
       text-align: center;
@@ -749,6 +791,213 @@
       }
     });
 
+    // === OFFER CARDS ===
+
+    var offerIdCounter = 0;
+
+    function createOfferCard() {
+      offerIdCounter++;
+      var id = offerIdCounter;
+
+      // Remove placeholder if present
+      var placeholder = document.querySelector('.offers-placeholder');
+      if (placeholder) placeholder.remove();
+
+      var card = document.createElement('div');
+      card.className = 'offer-card';
+      card.setAttribute('data-offer-id', id);
+
+      card.innerHTML =
+        '<div class="offer-header">' +
+          '<h3>Offer ' + id + '</h3>' +
+          '<button type="button" class="btn-remove" onclick="removeOffer(this)">Remove</button>' +
+        '</div>' +
+
+        // Field Group 1 - Buyer Info
+        '<div class="field-group">' +
+          '<h4>Buyer Info</h4>' +
+          '<div class="field-row">' +
+            '<label>Buyer Name(s)</label>' +
+            '<input type="text" name="buyer-name" placeholder="First Last and First Last">' +
+          '</div>' +
+          '<div class="offer-fields-grid-2">' +
+            '<div class="field">' +
+              '<label>Buyer\'s Agent</label>' +
+              '<input type="text" name="buyer-agent" placeholder="Agent name">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Brokerage</label>' +
+              '<input type="text" name="brokerage" placeholder="Brokerage name">' +
+            '</div>' +
+          '</div>' +
+          '<div class="checkbox-row">' +
+            '<input type="checkbox" name="unrepresented" id="unrepresented-' + id + '">' +
+            '<label for="unrepresented-' + id + '">Unrepresented Buyer</label>' +
+          '</div>' +
+        '</div>' +
+
+        // Field Group 2 - Financial Terms
+        '<div class="field-group">' +
+          '<h4>Financial Terms</h4>' +
+          '<div class="offer-fields-grid-2">' +
+            '<div class="field">' +
+              '<label>Purchase Price</label>' +
+              '<div class="input-prefix">' +
+                '<span class="prefix">$</span>' +
+                '<input type="number" name="purchase-price" min="0" step="1" placeholder="0">' +
+              '</div>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Down Payment</label>' +
+              '<div class="input-prefix">' +
+                '<span class="prefix">$</span>' +
+                '<input type="number" name="down-payment" min="0" step="1" placeholder="0">' +
+              '</div>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Down Payment %</label>' +
+              '<div class="input-suffix">' +
+                '<input type="number" name="down-payment-pct" min="0" max="100" step="0.1" placeholder="0">' +
+                '<span class="suffix">%</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Loan Type</label>' +
+              '<select name="loan-type">' +
+                '<option value="">Select...</option>' +
+                '<option value="conventional">Conventional</option>' +
+                '<option value="fha">FHA</option>' +
+                '<option value="va">VA</option>' +
+                '<option value="cash">Cash</option>' +
+                '<option value="dscr">DSCR</option>' +
+                '<option value="other">Other</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Earnest Money</label>' +
+              '<div class="input-prefix">' +
+                '<span class="prefix">$</span>' +
+                '<input type="number" name="earnest-money" min="0" step="1" placeholder="0">' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        // Field Group 3 - Timeline
+        '<div class="field-group">' +
+          '<h4>Timeline</h4>' +
+          '<div class="offer-fields-grid-3">' +
+            '<div class="field">' +
+              '<label>Close of Escrow</label>' +
+              '<input type="date" name="coe-date">' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Inspection Period</label>' +
+              '<div class="input-suffix">' +
+                '<input type="number" name="inspection-period" min="0" step="1" placeholder="10">' +
+                '<span class="suffix">days</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Offer Expiration</label>' +
+              '<input type="date" name="offer-expiration">' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        // Field Group 4 - Compensation
+        '<div class="field-group">' +
+          '<h4>Compensation</h4>' +
+          '<div class="offer-fields-grid-3">' +
+            '<div class="field">' +
+              '<label>Seller Concessions</label>' +
+              '<div class="input-prefix">' +
+                '<span class="prefix">$</span>' +
+                '<input type="number" name="concessions" min="0" step="1" placeholder="0">' +
+              '</div>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Buyer Agent Comp</label>' +
+              '<div class="input-prefix">' +
+                '<span class="prefix">$</span>' +
+                '<input type="number" name="buyer-agent-comp" min="0" step="1" placeholder="0">' +
+              '</div>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Buyer Agent Comp %</label>' +
+              '<div class="input-suffix">' +
+                '<input type="number" name="buyer-agent-comp-pct" min="0" max="100" step="0.01" placeholder="0">' +
+                '<span class="suffix">%</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        // Field Group 5 - Financing
+        '<div class="field-group">' +
+          '<h4>Financing</h4>' +
+          '<div class="offer-fields-grid-2">' +
+            '<div class="field">' +
+              '<label>Pre-Qualification Amount</label>' +
+              '<div class="input-prefix">' +
+                '<span class="prefix">$</span>' +
+                '<input type="number" name="pre-qual-amount" min="0" step="1" placeholder="0">' +
+              '</div>' +
+            '</div>' +
+            '<div class="field">' +
+              '<label>Pre-Qual Lender</label>' +
+              '<input type="text" name="pre-qual-lender" placeholder="Lender name">' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+
+        // Field Group 6 - Special Terms
+        '<div class="field-group">' +
+          '<h4>Special Terms</h4>' +
+          '<div class="field-row">' +
+            '<textarea name="special-terms" rows="3" placeholder="Appraisal waiver, rent-back, as-is, etc."></textarea>' +
+          '</div>' +
+        '</div>';
+
+      document.getElementById('offers-container').appendChild(card);
+      renumberOffers();
+      return card;
+    }
+
+    function removeOffer(btn) {
+      var cards = document.querySelectorAll('.offer-card');
+      if (cards.length <= 1) return; // Cannot remove last card
+
+      var card = btn.closest('.offer-card');
+      var displayNum = card.querySelector('h3').textContent.replace('Offer ', '');
+      if (!window.confirm('Remove Offer ' + displayNum + '? This can\'t be undone.')) return;
+
+      card.remove();
+      renumberOffers();
+    }
+
+    function renumberOffers() {
+      var cards = document.querySelectorAll('.offer-card');
+      cards.forEach(function(card, i) {
+        card.querySelector('h3').textContent = 'Offer ' + (i + 1);
+
+        // Update checkbox id/label for uniqueness
+        var checkbox = card.querySelector('input[name="unrepresented"]');
+        var label = card.querySelector('.checkbox-row label');
+        if (checkbox && label) {
+          var newId = 'unrepresented-' + card.getAttribute('data-offer-id');
+          checkbox.id = newId;
+          label.setAttribute('for', newId);
+        }
+      });
+
+      // Show/hide remove buttons: hide if only 1 card
+      var removeButtons = document.querySelectorAll('.offer-card .btn-remove');
+      removeButtons.forEach(function(btn) {
+        btn.style.display = cards.length <= 1 ? 'none' : '';
+      });
+    }
+
     // === INIT ===
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -763,6 +1012,12 @@
           updateCostTotal();
         });
       });
+
+      // Wire Add Offer button
+      document.getElementById('btn-add-offer').addEventListener('click', createOfferCard);
+
+      // Pre-load one empty offer card
+      createOfferCard();
     });
   </script>
 </body>
