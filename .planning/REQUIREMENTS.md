@@ -7,10 +7,10 @@
 
 ### Property Input
 
-- [ ] **PROP-01**: User can enter property address (street, city, state, zip)
-- [ ] **PROP-02**: User can enter property details (beds, baths, sqft, year built, lot size, pool, garage spaces)
-- [ ] **PROP-03**: User can enter list price
-- [ ] **PROP-04**: User can enter notable features as free text
+- [x] **PROP-01**: User can enter property address (street, city, state, zip)
+- [x] **PROP-02**: User can enter property details (beds, baths, sqft, year built, lot size, pool, garage spaces)
+- [x] **PROP-03**: User can enter list price
+- [x] **PROP-04**: User can enter notable features as free text
 
 ### Offer Input
 
@@ -26,12 +26,12 @@
 
 ### Cost Template
 
-- [ ] **COST-01**: User can configure listing commission percentage
-- [ ] **COST-02**: User can configure title/escrow estimate
-- [ ] **COST-03**: User can configure home warranty amount
-- [ ] **COST-04**: User can configure TC fee
-- [ ] **COST-05**: User can add/remove additional line items with label and amount
-- [ ] **COST-06**: Cost template persists in localStorage across sessions
+- [x] **COST-01**: User can configure listing commission percentage
+- [x] **COST-02**: User can configure title/escrow estimate
+- [x] **COST-03**: User can configure home warranty amount
+- [x] **COST-04**: User can configure TC fee
+- [x] **COST-05**: User can add/remove additional line items with label and amount
+- [x] **COST-06**: Cost template persists in localStorage across sessions
 
 ### Calculations
 
@@ -42,8 +42,8 @@
 
 ### Analysis
 
-- [ ] **ANLS-01**: User can enter strategic analysis notes in a text area
-- [ ] **ANLS-02**: Analysis text appears in the generated comparison page
+- [x] **ANLS-01**: User can enter strategic analysis notes in a text area
+- [x] **ANLS-02**: Analysis text appears in the generated comparison page
 
 ### Generated Page
 
@@ -90,10 +90,10 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PROP-01 | Phase 1 | Pending |
-| PROP-02 | Phase 1 | Pending |
-| PROP-03 | Phase 1 | Pending |
-| PROP-04 | Phase 1 | Pending |
+| PROP-01 | Phase 1 | Complete |
+| PROP-02 | Phase 1 | Complete |
+| PROP-03 | Phase 1 | Complete |
+| PROP-04 | Phase 1 | Complete |
 | OFFR-01 | Phase 1 | Pending |
 | OFFR-02 | Phase 1 | Pending |
 | OFFR-03 | Phase 1 | Pending |
@@ -103,18 +103,18 @@
 | OFFR-07 | Phase 1 | Pending |
 | OFFR-08 | Phase 1 | Pending |
 | OFFR-09 | Phase 1 | Pending |
-| COST-01 | Phase 1 | Pending |
-| COST-02 | Phase 1 | Pending |
-| COST-03 | Phase 1 | Pending |
-| COST-04 | Phase 1 | Pending |
-| COST-05 | Phase 1 | Pending |
-| COST-06 | Phase 1 | Pending |
+| COST-01 | Phase 1 | Complete |
+| COST-02 | Phase 1 | Complete |
+| COST-03 | Phase 1 | Complete |
+| COST-04 | Phase 1 | Complete |
+| COST-05 | Phase 1 | Complete |
+| COST-06 | Phase 1 | Complete |
 | CALC-01 | Phase 2 | Pending |
 | CALC-02 | Phase 2 | Pending |
 | CALC-03 | Phase 2 | Pending |
 | CALC-04 | Phase 2 | Pending |
-| ANLS-01 | Phase 1 | Pending |
-| ANLS-02 | Phase 1 | Pending |
+| ANLS-01 | Phase 1 | Complete |
+| ANLS-02 | Phase 1 | Complete |
 | PAGE-01 | Phase 3 | Pending |
 | PAGE-02 | Phase 3 | Pending |
 | PAGE-03 | Phase 3 | Pending |
