@@ -219,6 +219,8 @@
   .tag-gold { background: #FFF3D0; color: #8B6914; }
   .tag-red { background: #FFEBEE; color: var(--red); }
   .tag-gray { background: #ECEFF1; color: #546E7A; }
+  .tag-revised { background: rgba(201,149,62,0.15); color: var(--gold); font-size: 0.55rem; vertical-align: middle; margin-left: 4px; }
+  .revised-note { font-size: 0.68rem; color: var(--sand); margin: 8px 0 0 0; font-style: italic; }
 
   /* Net Summary Cards */
   .net-cards {
@@ -570,7 +572,7 @@
     <!-- Rank 2: Lu/Nguyen -->
     <div class="net-card" onclick="toggleCard(this)">
       <div class="rank">#2</div>
-      <div class="buyer-name">Lu / Nguyen</div>
+      <div class="buyer-name">Lu / Nguyen <span class="tag tag-revised">Revised</span></div>
       <div class="agent-name">Jamison Briley, RE Brokers of AZ</div>
       <div class="net-amount">$809,370</div>
       <div class="net-label">Est. Net to Seller</div>
@@ -594,7 +596,7 @@
     <!-- Rank 3: Gittings/Jabjiniak -->
     <div class="net-card" onclick="toggleCard(this)">
       <div class="rank">#3</div>
-      <div class="buyer-name">Gittings / Jabjiniak</div>
+      <div class="buyer-name">Gittings / Jabjiniak <span class="tag tag-revised">Revised</span></div>
       <div class="agent-name">Cassandra Marrujo, Realty ONE</div>
       <div class="net-amount">$809,020</div>
       <div class="net-label">Est. Net to Seller</div>
@@ -677,10 +679,10 @@
       <tr>
         <th>Term</th>
         <th class="best">Offer 1: Asad</th>
-        <th>Offer 2: Gittings / Jabjiniak</th>
+        <th>Offer 2: Gittings / Jabjiniak <span class="tag tag-revised">Revised</span></th>
         <th>Offer 3: Cazier</th>
         <th>Offer 4: Ayoub</th>
-        <th>Offer 5: Lu / Nguyen</th>
+        <th>Offer 5: Lu / Nguyen <span class="tag tag-revised">Revised</span></th>
       </tr>
     </thead>
     <tbody>
@@ -901,6 +903,7 @@
       </tr>
     </tbody>
   </table>
+  <p class="revised-note"><span class="tag tag-revised">Revised</span> Indicates updated terms received in response to multi-counter offer.</p>
   </div>
 
   <!-- Analysis Box -->
