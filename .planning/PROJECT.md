@@ -1,12 +1,12 @@
-# Offer Comparison Admin Tool
+# Offer Comparison Generator
 
 ## What This Is
 
-A self-service admin tool at `offers.liveazco.com/_admin/` that lets the Live AZ Co team (Jacqui, Suzie) upload MLS listing and purchase contract PDFs, review Claude-extracted data with confirmation checkboxes, and publish branded offer comparison pages with one click. Removes Josh as the bottleneck for creating offer comparison pages that sellers use to evaluate competing offers on their property.
+A single-file HTML tool that lets the Live AZ Co team (Jacqui, Suzie) manually enter property details and offer terms, auto-calculate net-to-seller for each offer, and generate a branded, print-ready comparison page. The team prints to PDF for sharing with sellers. Josh can optionally publish the HTML to offers.liveazco.com.
 
 ## Core Value
 
-Sellers receive accurate, professionally branded offer comparison pages that the team can create and update independently, without developer involvement.
+The team can independently create professional offer comparison pages without developer involvement, using a tool they already know how to use (same pattern as the Tenet converter).
 
 ## Requirements
 
@@ -16,57 +16,52 @@ Sellers receive accurate, professionally branded offer comparison pages that the
 
 ### Active
 
-- [ ] Team can upload an ARMLS MLS listing PDF and get structured property data extracted by Claude
-- [ ] Team can upload one or more AAR purchase contract PDFs and get structured offer data extracted
-- [ ] Addendums/counter offers can be attached to existing offer cards, with Claude merging terms
-- [ ] Every extracted field is editable with a confirmation checkbox gate before publishing
-- [ ] Net-to-seller auto-calculates in real-time using cost template + offer terms
-- [ ] Offers auto-rank by net-to-seller, highest first
-- [ ] Cost template is configurable and persists in localStorage
-- [ ] Claude drafts strategic analysis comparing all offers; team can edit before publishing
-- [ ] Preview opens the generated page in a new tab
-- [ ] Publish commits HTML to GitHub repo via Pages Function; Cloudflare auto-deploys
-- [ ] Load Existing dropdown lets team re-open and update previously published pages
-- [ ] Generated pages match the Dava Dr design (Slate/Cream/Canyon/Gold/Olive tokens, Playfair Display + DM Sans)
-- [ ] Generated pages are fully responsive with print-optimized layout
-- [ ] All API endpoints secured with X-Admin-Key header validation
-- [ ] CORS restricted to offers.liveazco.com
+- [ ] Team can enter property details (address, beds/baths/sqft, list price, year built, features)
+- [ ] Team can add multiple offers with key terms (price, down payment, loan type, earnest money, close date, concessions, buyer agent comp, pre-qual amount, inspection days)
+- [ ] Team can add/remove offers dynamically
+- [ ] Cost template is configurable (listing commission %, title/escrow, home warranty, TC fee, additional line items) and persists in localStorage
+- [ ] Net-to-seller auto-calculates in real-time as fields change
+- [ ] Offers auto-rank by net-to-seller, highest first, with dollar difference vs. top offer
+- [ ] Generate button produces a branded comparison page matching the Dava Dr design
+- [ ] Generated page opens in a new tab, optimized for print-to-PDF
+- [ ] Generated page includes: property banner, ranked offer cards, side-by-side comparison table, financing strength section
+- [ ] Strategic analysis text area for team's notes (included in generated page)
+- [ ] Unrepresented buyer flag with adjustable commission handling
+- [ ] Optional mortgage payoff field with interactive calculator on generated page
 
 ### Out of Scope
 
-- Authentication/password protection on admin page — discoverability is sufficient for team of three
-- Multi-user simultaneous editing — team coordinates verbally
-- Historical tracking of offer changes — not a current need
-- Email/SMS notifications on publish — manual sharing is fine
-- Automatic offer ranking commentary beyond Claude's initial draft — team edits manually
-- Integration with Lofty CRM — separate system, no overlap needed for v1
+- PDF parsing / Claude API integration — team reads contracts and enters data manually
+- Cloudflare Pages Functions / API endpoints — no backend needed
+- One-click publish to GitHub — Josh handles publishing manually when needed
+- Load Existing / round-tripping — each comparison is a fresh entry
+- Authentication — local tool, not publicly accessible
+- Integration with Lofty CRM — separate system
 
 ## Context
 
 - **Existing reference:** `1960-e-dava-dr/index.html` is the design template for generated pages
-- **Team:** Jacqui and Suzie coordinate with sellers daily but cannot create HTML pages. Josh currently hand-builds each one with Claude Code
-- **Domain:** Arizona real estate. ARMLS MLS listing PDFs (1-3 pages) and AAR purchase contracts (10-30 pages)
-- **Existing pattern:** The Tenet converter (`~/Projects/Tenet Equity/tenet-converter.html`) is a single-file HTML admin tool the team already uses. Same architectural pattern here
-- **Deployment:** Cloudflare Pages with Pages Functions. Repo auto-deploys on push
+- **Team:** Jacqui and Suzie coordinate with sellers daily and already read through every contract. Manual entry adds minimal overhead since they review every field anyway
+- **Existing pattern:** The Tenet converter (`~/Projects/Tenet Equity/tenet-converter.html`) is a single-file HTML tool the team already uses. Same pattern here
+- **Usage frequency:** 2-4 times per month
+- **Output:** Team prints the generated page to PDF and shares with sellers. Josh can optionally push the HTML file to the repo for web publishing
 
 ## Constraints
 
-- **Tech stack**: Single-file HTML admin page, no build tools, no framework — must match team's existing Tenet converter pattern
-- **Infrastructure**: Cloudflare Pages Functions only (no standalone Workers, no database)
-- **API**: Claude Sonnet (claude-sonnet-4-20250514) for PDF extraction via tool_use structured output
-- **Security**: X-Admin-Key header on all API endpoints + CORS restricted to offers.liveazco.com
-- **File size**: Client-side validation rejects PDFs over 10MB
-- **Publishing**: GitHub Contents API to create/update files in the repo
+- **Tech stack**: Single-file HTML, no build tools, no framework, no backend
+- **Design**: Must match Dava Dr page design tokens (Slate, Cream, Canyon, Gold, Olive; Playfair Display + DM Sans)
+- **Output**: Print-optimized layout that produces clean PDFs via browser print dialog
+- **Persistence**: localStorage only (cost template defaults)
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Single-file HTML admin (no framework) | Matches Tenet converter pattern, no build tools, any developer can maintain | — Pending |
-| Pages Functions over standalone Worker | Same repo, same deployment, zero additional infrastructure | — Pending |
-| Checkbox confirmation gate | Claude may misread PDF numbers; sellers make six-figure decisions on these pages | — Pending |
-| Embedded JSON for round-tripping | No database to maintain; generated page carries its own data | — Pending |
-| No auth on admin page (v1) | `_admin` path not publicly linked; team of three | — Pending |
+| Drop PDF parsing / Claude API | 2-4x/month frequency doesn't justify API infrastructure. Team reads contracts anyway | — Pending |
+| Drop one-click publish | Josh can manually push HTML when needed. Eliminates GitHub API + Cloudflare Functions | — Pending |
+| Single-file HTML (no framework) | Matches Tenet converter pattern, zero dependencies, team already knows this | — Pending |
+| Print-to-PDF as primary output | No backend needed. Browser print dialog produces shareable PDFs instantly | — Pending |
+| Manual entry over automation | Team reviews every field in every contract. Manual entry is the confirmation step | — Pending |
 
 ---
-*Last updated: 2026-03-30 after initialization*
+*Last updated: 2026-03-30 after strategic pivot to lightweight template*
